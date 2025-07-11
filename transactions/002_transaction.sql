@@ -6,7 +6,7 @@ BEGIN TRY
     BEGIN DISTRIBUTED TRANSACTION;
 
     UPDATE [BankDB1].[dbo].[Account] SET Balance = Balance - 1000 WHERE AccountID = 1;
-    UPDATE [BankDB2].[dbo].[Accoun] SET Balance = Balance + 1000 WHERE AccountID = 2;
+    UPDATE [BankDB2].[dbo].[Account] SET Balance = Balance + 1000 WHERE AccountID = 2;
 
     COMMIT TRANSACTION;
     PRINT 'Transaction committed successfully.';
