@@ -1,0 +1,50 @@
+services:
+  bankDB:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: bankDB
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_RPC_PORT: ${MSSQL_RPC_PORT}
+      MSSQL_DTC_TCP_PORT: ${MSSQL_DTC_TCP_PORT}
+    hostname: bankDB
+    ports:
+      - 1433:1433
+      - 1350:135
+      - 51000:51000
+    volumes:
+      - mssql_data:/var/opt/mssql
+  bankDB2:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: bankDB2
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_RPC_PORT: ${MSSQL_RPC_PORT}
+      MSSQL_DTC_TCP_PORT: ${MSSQL_DTC_TCP_PORT}
+    hostname: bankDB2
+    ports:
+      - 1434:1433
+      - 1351:135
+      - 51001:51000
+    volumes:
+      - mssql_data2:/var/opt/mssql
+
+  app:
+    build: .
+    container_name: bankAPI
+    restart: on-failure
+    depends_on:
+      - bankDB
+    env_file: .env
+    command: ["./entrypoint.sh"]
+    ports:
+      - "8080:8080"
+
+volumes:
+  mssql_data:
+  mssql_data2:

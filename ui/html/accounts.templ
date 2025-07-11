@@ -1,0 +1,40 @@
+package html
+
+import (
+  "fmt"
+  "path"
+
+  "github.com/MoXcz/sql-server-linux-practice/internal/models"
+)
+
+
+templ Accounts(accounts []models.Account) {
+@Base() {
+  <h1>Account List</h1>
+  <table class="accounts-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>Created at</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    for _, s := range accounts {
+      <tr>
+        <td>{fmt.Sprintf("%v", s.ID)}</td>
+        <td>{s.Name}</td>
+        <td>$ {s.Balance}</td>
+        <td>{fmt.Sprintf("%v", s.Created.Format("02 January"))}</td>
+        <td>
+          <!-- <a href={ templ.SafeURL(path.Join("account", fmt.Sprintf("%d", s.ID)))}>Edit</a> -->
+          <a href={ templ.SafeURL(path.Join("account", fmt.Sprintf("%d", s.ID)))}>View</a>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+}
+}

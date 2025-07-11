@@ -1,0 +1,28 @@
+package html
+
+templ AccountForm() {
+@Base() {
+<form method="post" action="/account/new" class="account-form" hx-target="body" hx-push-url="true">
+  <fieldset>
+    <legend>New Account</legend>
+    <div class="form-grid">
+      <p>
+        <label for="title">Account name:</label>
+        <input type="text" name="name" required>
+      </p>
+      <p>
+        <label>Starting balance:</label>
+        <input type="number" name="balance" min="0" step="0.01">
+      </p>
+    </div>
+
+    <button>Create account</button>
+  </fieldset>
+</form>
+
+<p>
+    <a href="/account">Back</a>
+</p>
+}
+}
+

@@ -1,0 +1,21 @@
+package html
+
+import (
+  "fmt"
+	"github.com/MoXcz/sql-server-linux-practice/internal/models"
+  )
+
+
+templ Account(account models.Account) {
+@Base() {
+  <h2>{ account.Name }</h2>
+  <div>
+    <p>{ account.Balance }</p>
+    <p>{ fmt.Sprintf("%d", account.ID) }</p>
+    <p>{ fmt.Sprintf("%v", account.Created.Format("02 January")) }</p>
+  </div>
+  <p>
+      <a href="/account">Back</a>
+  </p>
+}
+}
