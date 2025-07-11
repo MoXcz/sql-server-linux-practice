@@ -17,7 +17,7 @@ docker exec -it sql1 bash
 ## Start application
 
 > [!WARNING]
-> Before doing any of this it's necessary to have a .env file. Just rename local.env to .env and adjust the values accordingly
+> Before doing any of this it's necessary to have an `.env` file. Just rename local.env to .env and adjust the values accordingly
 
 ```sh
 # with Go installed
